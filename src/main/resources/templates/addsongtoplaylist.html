@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Add Song to Playlist</title>
+    <style>
+        body { background-color: #fce4ec; font-family: Arial, sans-serif; padding: 20px; }
+        .container { background-color: white; padding: 30px; border-radius: 8px; max-width: 400px; margin: auto; }
+        h1 { text-align: center; color: #e91e63; }
+        .btn-primary { background-color: #e91e63; border: none; width: 100%; }
+        .btn-primary:hover { background-color: #d81b60; }
+        select, .form-control { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+
+<body>
+    <h1>Add song to a playlist</h1>
+    <div class="container">
+        <form th:action="@{/savesongtoplaylist}" method="post">
+            <input type="hidden" name="songId" th:value="${song.id}" />
+
+            <p>Song: <span th:text="${song.title}"></span></p>
+
+            <label for="playlist">Select Playlist:</label>
+            <select id="playlist" name="playlistId" required>
+                <option th:each="playlist : ${playlists}" th:value="${playlist.id}" th:text="${playlist.name}"></option>
+            </select>
+
+            <input type="submit" value="Add to Playlist" />
+        </form>
+    </div>
+</body>
+
+</html>

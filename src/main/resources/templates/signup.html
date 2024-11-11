@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign-up</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+    <style>
+        body, html { height: 100%; margin: 0; background: #fce4ec; }
+        .signup-container { display: flex; justify-content: center; align-items: center; height: 100%; }
+        .signup-form { width: 100%; max-width: 400px; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        .btn-primary { width: 100%; background: #e91e63; border: none; }
+        .btn-primary:hover { background: #d81b60; }
+        .text-danger { font-size: 0.875rem; }
+    </style>
+</head>
+
+<body>
+    <div class="signup-container">
+        <div class="signup-form">
+            <h2 class="text-center">Sign Up</h2>
+            <form th:object="${signupform}" th:action="@{/saveuser}" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" th:field="*{username}" id="username" class="form-control" required />
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" th:field="*{password}" id="password" class="form-control" required />
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <label for="passwordCheck">Re-type Password</label>
+                    <input type="password" th:field="*{passwordCheck}" id="passwordCheck" class="form-control" required />
+                    <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}" class="text-danger"></p>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-secondary" value="Sign Up" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

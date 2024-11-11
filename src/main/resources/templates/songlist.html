@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #fce4ec; font-family: Arial, sans-serif; padding: 20px; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        table { width: 100%; margin-top: 20px; }
+        th, td { padding: 10px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .btn-sm { margin: 5px; }
+        h1 { font-size: 24px; }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>List of added songs </h1>
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Title</th>
+                <th>duration</th>
+                <th> Author</th>
+                <th>Playlist</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr th:each="song : ${songs}">
+                <td th:text="${song.title}">Title</td>
+                <td th:text="${song.duration}">Duration</td>
+                <td th:text="${song.author}">Author</td>
+                <td>
+                    <span th:each="playlist, iterStat : ${song.playlists}">
+                        <span th:text="${playlist.name}">Playlist Name</span>
+                        <span th:if="${!iterStat.last}">, </span> 
+                    </span>
+                </td>
+                <td>
+                    <a th:href="@{/addsongtoplaylist/{songId}(songId=${song.id})}" class="btn-secondary btn-sm">Add to
+                        Playlist</a>
+                </td>
+            </tr>
+        </table>
+        <a href="/playlistlist" class="btn btn-secondary btn-sm">Back to home page</a>
+    </div>
+</body>
+
+</html>

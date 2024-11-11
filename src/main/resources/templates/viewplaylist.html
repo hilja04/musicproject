@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #fce4ec; font-family: Arial, sans-serif; padding: 20px; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        table { width: 100%; margin-top: 20px; }
+        th, td { padding: 10px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .btn-sm { margin: 5px; }
+        h1 { font-size: 24px; }
+    </style>
+    <title>View playlist</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 th:text="${playlist.name}">Playlist Name</h1>
+
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Song</th>
+                <th>Duration</th>
+                <th>Author</th>
+                <th th:text="${amount} + ' ' + ' songs'"></th>
+                <th> <a th:if="${playlist.user != null && loggedInUsername == playlist.user.username}"
+                        th:href="@{/addsong/{id}(id=${playlist.id})}" class="btn btn-secondary btn-sm"
+                        sec:authorize="isAuthenticated()">Add a song</a></th>
+            </tr>
+
+            <tr th:each="song : ${songs}">
+                <td th:text="${song.title}">Title</td>
+                <td th:text="${song.duration}">Duration</td>
+                <td th:text="${song.author}">Author</td>
+                <td>
+                    <a th:if="${playlist.user != null && loggedInUsername == playlist.user.username}"
+                        th:href="@{/delete/song/{id}(id=${song.id}, playlistId=${playlist.id})}"
+                        class="btn btn-danger btn-sm">Delete</a>
+
+                    <a th:if="${loggedInRole == 'ADMIN'}"
+                        th:href="@{/delete/admin/song/{id}(id=${song.id}, playlistId=${playlist.id})}"
+                        class="btn btn-danger btn-sm">Delete (Admin)</a>
+                </td>
+            </tr>
+        </table>
+        <a href="/playlistlist" class="btn btn-secondary btn-sm">Back to home page</a>
+</body>
+
+</html>
