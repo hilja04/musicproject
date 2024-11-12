@@ -40,8 +40,8 @@ public class MusicprojectApplication {
             prepository.save(playlist1);
             prepository.save(playlist2);
 
-            AppUser user1 = new AppUser("user", passwordEncoder().encode("password"), "USER");
-            AppUser user2 = new AppUser("admin", passwordEncoder().encode("aer3quoh"), "ADMIN");
+            AppUser user1 = new AppUser("user", passwordEncoder().encode("g7hi12ab"), "USER");
+            AppUser user2 = new AppUser("admin", passwordEncoder().encode("q4kw79fl"), "ADMIN");
             appUserRepository.save(user1);
             appUserRepository.save(user2);
 
