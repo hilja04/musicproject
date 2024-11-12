@@ -35,10 +35,10 @@ public class MusicprojectApplication {
             log.info("Saving playlists");
 
             Playlist playlist1 = new Playlist(null, "Pop Songs", "20/10/2024", null);
-            Playlist playlist2 = new Playlist(null, "Suomi Biisit", "26/10/2024", null);
+          
 
             prepository.save(playlist1);
-            prepository.save(playlist2);
+           
 
             AppUser user1 = new AppUser("user", passwordEncoder().encode("g7hi12ab"), "USER");
             AppUser user2 = new AppUser("admin", passwordEncoder().encode("q4kw79fl"), "ADMIN");
